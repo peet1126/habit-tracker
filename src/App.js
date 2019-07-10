@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import CreateTodo from "./CreateTodo/CreateTodo";
+import TodoItems from "./TodoItems/TodoItems";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    completed: false,
+    todo: [],
+    text: ""
+  };
+
+  componentDidMount() {
+    console.log("component did mount");
+  }
+
+  handleChange = event => {
+    console.log(event.currentTarget.name);
+    this.setState({
+      [event.currentTarget.name]: event.currentTarget.value
+    });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.setState({
+      todo: [this.state.text, ...this.state.todo],
+      text: ""
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <CreateTodo
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          inputTextName="text"
+          value={this.state.todo}
+        />
+        <TodoItems />
+      </div>
+    );
+  }
 }
 
 export default App;
