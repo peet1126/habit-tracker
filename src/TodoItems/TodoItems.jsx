@@ -1,15 +1,29 @@
-import React, { Component } from "react";
+import React from "react";
 
-class TodoItems extends Component {
-  render() {
-    return (
-      <div>
-        <h3>sup1</h3>
-        <h3>sup2</h3>
-        <h3>sup3</h3>
-      </div>
-    );
-  }
-}
+const TodoItems = ({ todo, deleteTodo }) => {
+  const todoList = todo.length ? (
+    todo.map((todo, id) => {
+      return (
+        <li className="todo-item" key={id}>
+          <span
+            onClick={() => {
+              deleteTodo(id);
+            }}
+          >
+            {todo}
+          </span>
+        </li>
+      );
+    })
+  ) : (
+    <p>You are all done</p>
+  );
+  return (
+    <div>
+      <h3>ToDo's</h3>
+      <ul>{todoList}</ul>
+    </div>
+  );
+};
 
 export default TodoItems;

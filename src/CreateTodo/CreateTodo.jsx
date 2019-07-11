@@ -9,6 +9,7 @@ class CreateTodo extends Component {
             <input
               name={this.props.inputTextName}
               onChange={this.props.handleChange}
+              value={this.props.textValue}
             />
           </div>
           <input type="submit" />

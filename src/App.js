@@ -28,16 +28,28 @@ class App extends Component {
     });
   };
 
+  deleteTodo = id => {
+    console.log(this.state.todo[id]);
+    const newTodos = this.state.todo.filter(todo => {
+      return this.state.todo[id] !== todo;
+    });
+    this.setState({ todo: newTodos });
+  };
+
   render() {
     return (
-      <div>
+      <div className="App">
         <CreateTodo
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           inputTextName="text"
+          textValue={this.state.text}
+        />
+        <TodoItems
+          todo={this.state.todo}
+          deleteTodo={this.deleteTodo}
           value={this.state.todo}
         />
-        <TodoItems />
       </div>
     );
   }
