@@ -3,6 +3,11 @@ const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
 
+// connect to the database with Mongoose
+require("./config/database");
+
+var apiRouter = require("./routes/api/api");
+
 const app = express();
 
 app.use(logger("dev"));
@@ -14,7 +19,7 @@ app.use(favicon(path.join(__dirname, "build", "favicon.ico")));
 app.use(express.static(path.join(__dirname, "build")));
 
 // Put API routes here, before the "catch all" route
-
+app.use("/api", apiRouter);
 // The following "catch all" route (note the *)is necessary
 // for a SPA's client-side routing to properly work
 app.get("/*", function(req, res) {
