@@ -17,6 +17,7 @@ function updateHabit(req, res) {
 }
 
 function deleteHabit(req, res) {
+  console.log(req.params);
   Habit.findByIdAndDelete(req.params.id).then(function(h) {
     res.status(200).json(h);
   });
@@ -29,6 +30,7 @@ function getOneHabit(req, res) {
 }
 
 function createHabit(req, res) {
+  console.log(req.body);
   Habit.create(req.body).then(function(h) {
     res.status(200).json(h);
   });

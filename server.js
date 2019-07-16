@@ -1,16 +1,19 @@
 const express = require("express");
 const path = require("path");
 const favicon = require("serve-favicon");
+const bodyParser = require("body-parser");
 const logger = require("morgan");
+const cors = require("cors");
 
 // connect to the database with Mongoose
+require("dotenv").config();
 require("./config/database");
-
-var apiRouter = require("./routes/api/api");
 
 const app = express();
 
+app.use(cors());
 app.use(logger("dev"));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Configure both serve-favicon & static middlewares
@@ -19,7 +22,8 @@ app.use(favicon(path.join(__dirname, "build", "favicon.ico")));
 app.use(express.static(path.join(__dirname, "build")));
 
 // Put API routes here, before the "catch all" route
-app.use("/api", apiRouter);
+app.use("/api/habits", require("./routes/api/habits"));
+app.use("/users", require("./routes/api/users"));
 // The following "catch all" route (note the *)is necessary
 // for a SPA's client-side routing to properly work
 app.get("/*", function(req, res) {

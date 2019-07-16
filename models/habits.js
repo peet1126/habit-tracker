@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 
 const habitsSchema = new Schema(
   {
-    todo: String
+    description: String,
+    date: Date,
+    completed: false
   },
   {
     timestamps: true
@@ -11,3 +13,4 @@ const habitsSchema = new Schema(
 );
 
 module.exports = mongoose.model("Habit", habitsSchema);
+// { type: Date, default: Date.now }

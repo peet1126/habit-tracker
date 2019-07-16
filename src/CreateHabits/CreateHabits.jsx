@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class CreateTodo extends Component {
+class CreateHabits extends Component {
   render() {
     return (
       <div>
@@ -19,4 +19,4 @@ class CreateTodo extends Component {
   }
 }
 
-export default CreateTodo;
+export default CreateHabits;
