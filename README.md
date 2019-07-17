@@ -1,5 +1,5 @@
 # Habit Tracker
-### I wanted to created this app to track if habits are sticking. When look back at the last month it would be clear what habits are sticking and witch habits are not. 
+### Created an app that tracks if habits are sticking or not. When the user looks back at the last month it would be clear what habits are sticking and which habits are not. 
 
 ![Imgur](https://i.imgur.com/Ppq7RuC.png)
 
