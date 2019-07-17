@@ -9,7 +9,11 @@ const Habits = props => {
       <td>{props.habit.date.substring(0, 10)}</td>
       <td>
         <Link to={"/edit/" + props.habit._id}>edit</Link>|
-        <Link to={"/"} onClick={() => props.deleteHabit(props.habit._id)}>
+        <Link
+          to={"/"}
+          onClick={() => props.handleDelete(props.habit._id)}
+          //   onClick={evnent => props.deleteHabit(props.habit._id)}
+        >
           Delete
         </Link>
       </td>

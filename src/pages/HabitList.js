@@ -1,26 +1,7 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import Habits from "./Habits";
-// import axios from "axios";
 
-// const Habit = props => (
-//   <tr>
-//     <td>{props.habits.description}</td>
-//     <td>{props.habits.completed}</td>
-//     <td>{props.habits.date.substring(0, 10)}</td>
-//     <td>
-//       <Link to={"/edit/" + props.habit._id}>edit</Link>|
-//       <Link
-//         to={"/"}
-//         onClick={() => {
-//           props.deleteHabit(props.habit._id);
-//         }}
-//       >
-//         Delete
-//       </Link>
-//     </td>
-//   </tr>
-// );
 
 export default class HabitList extends Component {
   state = {
@@ -35,7 +16,6 @@ export default class HabitList extends Component {
       });
     });
   }
-
   async deleteHabit(id) {
     console.log("did");
     try {
@@ -47,7 +27,21 @@ export default class HabitList extends Component {
     }
   }
 
-  
+  handleDelete = async id => {
+    console.log(id);
+    await this.deleteHabit(id)
+      .then(results => console.log(results))
+      .catch(error => console.error(error));
+
+
+    const newState = await getHabit()
+      .then(results => {
+        console.log("these are the truth", results);
+        return results;
+      })
+      .catch(error => console.error(error));
+    await this.setState({ habits: newState });
+  };
 
   render() {
     const habitList = this.state.habits.map(currentHabit => {
@@ -56,6 +50,7 @@ export default class HabitList extends Component {
           habit={currentHabit}
           deleteHabit={this.deleteHabit}
           key={currentHabit._id}
+          handleDelete={this.handleDelete}
         />
       );
     });

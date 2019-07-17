@@ -9,15 +9,15 @@ module.exports = {
 };
 
 function updateHabit(req, res) {
-  Habit.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(function(
-    h
-  ) {
-    res.status(200).json(h);
-  });
+  console.log(req);
+  // Habit.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(function(
+  //   h
+  // ) {
+  //   res.status(200).json(h);
+  // });
 }
 
 function deleteHabit(req, res) {
-  console.log(req.params);
   Habit.findByIdAndDelete(req.params.id).then(function(h) {
     res.status(200).json(h);
   });

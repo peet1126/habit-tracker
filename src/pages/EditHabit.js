@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class CreateHabit extends Component {
+export default class EditHabit extends Component {
   state = {
     description: "",
-    deration: 0,
     date: new Date(),
-    completed: false
+    completed: ""
   };
 
   onChangeDescription = event => {
@@ -22,18 +21,20 @@ export default class CreateHabit extends Component {
   };
   onChangeCompleted = event => {
     this.setState({
-      completed: event.target.value
+      completed: "✓"
     });
   };
 
-  onSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault();
+    console.log("edit");
 
     const habit = {
       description: this.state.description,
       date: this.state.date,
       completed: this.state.completed
     };
+
     const options = {
       method: "POST",
       headers: {
@@ -43,7 +44,10 @@ export default class CreateHabit extends Component {
     };
     async function habitFetch(options) {
       try {
-        const sendPost = await fetch("/api/habits/create", options);
+        const sendPost = await fetch(
+          "/api/habits/edit/" + this.props.match.params.id,
+          options
+        );
         const postResults = await sendPost.json();
         return await postResults;
       } catch (err) {
@@ -51,11 +55,10 @@ export default class CreateHabit extends Component {
       }
     }
 
-    habitFetch(options).then(habitData => {
-      console.log(habitData);
+    habitFetch(options).then(result => {
+      console.log(result);
       this.setState({
-        habits: [this.state.text, ...this.state.habits],
-        text: ""
+        habits: [{ ...result }, ...this.state.habits]
       });
     });
 
@@ -67,7 +70,7 @@ export default class CreateHabit extends Component {
     return (
       <div>
         <h3>Start Working On A New Habit</h3>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Habit Description:</label>
             <input
@@ -82,6 +85,7 @@ export default class CreateHabit extends Component {
               type="checkbox"
               className="form-check-input"
               id="exampleCheck1"
+              value={this.state.completed}
               onChange={this.onChangeCompleted}
             />
             <label className="form-check-label">
@@ -105,4 +109,3 @@ export default class CreateHabit extends Component {
     );
   }
 }
-

@@ -32,8 +32,8 @@ export default class Navbar extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Pricing
+              <Link className="nav-link" to="/login" component={this.LoginButton}>
+                Login
               </Link>
             </li>
           </ul>

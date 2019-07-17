@@ -6,6 +6,6 @@ router.get("/getAll", habitsCtrl.getAllHabits);
 router.get("/habits/:id", habitsCtrl.getOneHabit);
 router.post("/create", habitsCtrl.createHabit);
 router.get("/delete/:id", habitsCtrl.deleteHabit);
-router.put("/habits/:id", habitsCtrl.updateHabit);
+router.post("/edit/:id", habitsCtrl.updateHabit);
 
 module.exports = router;
