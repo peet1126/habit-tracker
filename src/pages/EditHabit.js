@@ -25,7 +25,7 @@ export default class EditHabit extends Component {
     });
   };
 
-  handleSubmit = event => {
+  handleEditSubmit = event => {
     event.preventDefault();
     console.log("edit");
 
@@ -42,7 +42,7 @@ export default class EditHabit extends Component {
       },
       body: JSON.stringify(this.state)
     };
-    async function habitFetch(options) {
+    async function habitEditFetch(options) {
       try {
         const sendPost = await fetch(
           "/api/habits/edit/" + this.props.match.params.id,
@@ -55,22 +55,23 @@ export default class EditHabit extends Component {
       }
     }
 
-    habitFetch(options).then(result => {
-      console.log(result);
-      this.setState({
-        habits: [{ ...result }, ...this.state.habits]
-      });
+    habitEditFetch(options).then(() => {
+      console.log(options);
+      // this.setState({
+      //   habits: [{ ...result }, ...this.state.habits]
+      // });
+      this.props.history.push("/");
     });
 
     console.log(habit);
-    window.location = "/";
+    // window.location = "/";
   };
 
   render() {
     return (
       <div>
         <h3>Start Working On A New Habit</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleEditSubmit}>
           <div className="form-group">
             <label>Habit Description:</label>
             <input

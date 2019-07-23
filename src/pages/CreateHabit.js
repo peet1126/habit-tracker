@@ -51,14 +51,7 @@ export default class CreateHabit extends Component {
       }
     }
 
-    habitFetch(options).then(result => {
-      //   console.log(result);
-      //   //   this.setState(
-      //   //     {
-      //   //       habits: [{ ...result }, ...this.state.habits]
-      //   //     },
-      //   this.props.history.push("/");
-      //   //   );
+    habitFetch(options).then(() => {
       this.props.history.push("/");
     });
 
